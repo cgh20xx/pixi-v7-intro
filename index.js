@@ -52,10 +52,14 @@ texturesPromise.then((texture) => {
   // 改變 Sprite x y 座標的三種方式
   cat.x = 0;
   cat.y = 0;
-  // 為精靈同時改變相同 x y 座標
-  cat.position.set(50);
-  // 為精靈同時改變不同 x y 座標
-  cat.position.set(50, 100);
+
+  // 改變 Sprite 錨點位置 (移到圖片長和寬的一半)
+  cat.anchor.set(0.5);
+
+  // 改變 Sprite 縮放比例
+  cat.scale.set(2);
+  console.log(cat.width); // 寬高變2倍了
+  // 注意：若直接改變 width height 會連動 scale 也被改變！
 
   app.stage.addChild(cat);
 });
