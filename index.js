@@ -35,13 +35,24 @@ PIXI.Assets.add('cat', 'images/cat.png');
 PIXI.Assets.add('blob', 'images/blob.png');
 PIXI.Assets.add('door', 'images/door.png');
 
+function onProgress(progress) {
+  console.log(`已載入 ${progress * 100}%`);
+}
+
 // 使用 PIXI.Assets.load 載入指定圖片並返回 Promise http://pixijs.download/release/docs/PIXI.Assets.html#load
-const texturesPromise = PIXI.Assets.load(['cat', 'blob', 'door']);
+const texturesPromise = PIXI.Assets.load(['cat', 'blob', 'door'], onProgress);
 texturesPromise.then((texture) => {
-  console.log('圖片載入完成');
+  console.log('所有圖片載入完成');
   // console.log(texture);
   // console.log(
   //   'texture.cat === PIXI.utils.TextureCache.cat ?',
   //   texture.cat === PIXI.utils.TextureCache.cat
   // );
+  const cat = new PIXI.Sprite(texture.cat);
+  cat.x = 0;
+  const blob = new PIXI.Sprite(texture.blob);
+  blob.x = 20;
+  const door = new PIXI.Sprite(texture.door);
+  door.x = 40;
+  app.stage.addChild(cat, blob, door); // stage.addChild 也可以傳入多個精靈
 });
