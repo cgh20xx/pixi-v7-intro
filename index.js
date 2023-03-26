@@ -68,4 +68,9 @@ texturesPromise.then((texture) => {
   // cat.rotation = 180 * PIXI.DEG_TO_RAD;
 
   app.stage.addChild(cat);
+
+  // 使用 app.ticker 讓畫面動起來！
+  app.ticker.add(() => {
+    cat.rotation += 0.01; // 每次畫面更新改變旋轉角度，太好了！
+  });
 });
