@@ -70,8 +70,8 @@ texturesPromise.then((texture) => {
   app.stage.addChild(cat);
 
   // 使用 app.ticker 讓畫面動起來！
-  app.ticker.maxFPS = 60; // 看起來不同裝置螢幕更新率問題好像解決了！
-  app.ticker.add(() => {
-    cat.rotation += 0.01; // 每次畫面更新改變旋轉角度，太好了！
+  // app.ticker.maxFPS = 60; // 不建議這麼做
+  app.ticker.add((delta) => {
+    cat.rotation += 0.01 * delta; // 現在不同螢幕更新率的裝置，轉起來的速度也都一樣了！
   });
 });
