@@ -49,17 +49,23 @@ texturesPromise.then((texture) => {
   //   texture.cat === PIXI.utils.TextureCache.cat
   // );
   const cat = new PIXI.Sprite(texture.cat);
-  // 改變 Sprite x y 座標的三種方式
-  cat.x = 0;
-  cat.y = 0;
+
+  // 讓我們把 Sprite 移到畫面中央並回復正常大小再繼續。
+  cat.x = app.view.width / 2;
+  cat.y = app.view.height / 2;
 
   // 改變 Sprite 錨點位置 (移到圖片長和寬的一半)
   cat.anchor.set(0.5);
 
   // 改變 Sprite 縮放比例
-  cat.scale.set(2);
-  console.log(cat.width); // 寬高變2倍了
+  cat.scale.set(1);
   // 注意：若直接改變 width height 會連動 scale 也被改變！
+
+  // 改變 Sprite.rotation 的旋轉角度 (使用的是弧度不是角度)
+  cat.rotation = Math.PI; // 旋轉 180 度 (一圈是 2 pi)
+
+  // 沒那麼糟！PIXI 有提供角度轉弧度的常數 http://pixijs.download/release/docs/PIXI.html#RAD_TO_DEG
+  // cat.rotation = 180 * PIXI.DEG_TO_RAD;
 
   app.stage.addChild(cat);
 });
