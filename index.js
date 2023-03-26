@@ -49,10 +49,13 @@ texturesPromise.then((texture) => {
   //   texture.cat === PIXI.utils.TextureCache.cat
   // );
   const cat = new PIXI.Sprite(texture.cat);
+  // 改變 Sprite x y 座標的三種方式
   cat.x = 0;
-  const blob = new PIXI.Sprite(texture.blob);
-  blob.x = 20;
-  const door = new PIXI.Sprite(texture.door);
-  door.x = 40;
-  app.stage.addChild(cat, blob, door); // stage.addChild 也可以傳入多個精靈
+  cat.y = 0;
+  // 為精靈同時改變相同 x y 座標
+  cat.position.set(50);
+  // 為精靈同時改變不同 x y 座標
+  cat.position.set(50, 100);
+
+  app.stage.addChild(cat);
 });
