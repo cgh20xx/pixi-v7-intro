@@ -51,8 +51,8 @@ texturesPromise.then((texture) => {
   const cat = new PIXI.Sprite(texture.cat);
 
   // 讓我們把 Sprite 移到畫面中央並回復正常大小再繼續。
-  cat.x = app.view.width / 2;
-  cat.y = app.view.height / 2;
+  cat.x = app.screen.width / 2;
+  cat.y = app.screen.height / 2;
 
   // 改變 Sprite 錨點位置 (移到圖片長和寬的一半)
   cat.anchor.set(0.5);
