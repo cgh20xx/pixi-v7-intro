@@ -93,12 +93,7 @@ texturesPromise.then((texture) => {
 
   // 舞台偵聽事件的方法，需設置 hitArea
   app.stage.eventMode = 'static';
-  app.stage.hitArea = new PIXI.Rectangle(
-    0,
-    0,
-    app.screen.width,
-    app.screen.height
-  );
+  app.stage.hitArea = app.screen; // app.screen 就是 PIXI.Rectangle
   // 推薦！pointertap 相容滑鼠及觸摸事件
   app.stage.on('pointertap', (event) => {
     console.log('stage', event.global);
