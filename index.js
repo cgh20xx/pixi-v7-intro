@@ -76,12 +76,18 @@ texturesPromise.then((texture) => {
   });
 
   // 新增 interactive 互動事件
-  cat.interactive = true; // 但 interactive 在 v7.2 已棄用
+  // cat.interactive = true; // 但 interactive 在 v7.2 已棄用
 
   //  eventMode: http://pixijs.download/release/docs/PIXI.DisplayObject.html#eventMode
-  // cat.eventMode = 'static'; // 同 interactive = true;
+  cat.eventMode = 'static'; // 同 interactive = true;
   // cat.eventMode = 'auto'; // 同 interactive = false;
+
+  // 新增滑鼠指標圖示
+  cat.cursor = 'pointer';
+
   cat.on('click', (event) => {
     console.log('hello');
+    // 更新紋理
+    cat.texture = texture.blob;
   });
 });
