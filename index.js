@@ -74,4 +74,14 @@ texturesPromise.then((texture) => {
   app.ticker.add((delta) => {
     cat.rotation += 0.01 * delta; // 現在不同螢幕更新率的裝置，轉起來的速度也都一樣了！
   });
+
+  // 新增 interactive 互動事件
+  cat.interactive = true; // 但 interactive 在 v7.2 已棄用
+
+  //  eventMode: http://pixijs.download/release/docs/PIXI.DisplayObject.html#eventMode
+  // cat.eventMode = 'static'; // 同 interactive = true;
+  // cat.eventMode = 'auto'; // 同 interactive = false;
+  cat.on('click', (event) => {
+    console.log('hello');
+  });
 });
