@@ -79,15 +79,29 @@ texturesPromise.then((texture) => {
   // cat.interactive = true; // 但 interactive 在 v7.2 已棄用
 
   //  eventMode: http://pixijs.download/release/docs/PIXI.DisplayObject.html#eventMode
-  cat.eventMode = 'static'; // 同 interactive = true;
+  // cat.eventMode = 'static'; // 同 interactive = true;
   // cat.eventMode = 'auto'; // 同 interactive = false;
 
   // 新增滑鼠指標圖示
-  cat.cursor = 'pointer';
+  // cat.cursor = 'pointer';
 
-  cat.on('click', (event) => {
-    console.log('hello');
-    // 更新紋理
-    cat.texture = texture.blob;
+  // cat.on('click', (event) => {
+  //   console.log('hello');
+  //   // 更新紋理
+  //   cat.texture = texture.blob;
+  // });
+
+  // 舞台偵聽事件的方法，需設置 hitArea
+  app.stage.eventMode = 'static';
+  app.stage.hitArea = new PIXI.Rectangle(
+    0,
+    0,
+    app.screen.width,
+    app.screen.height
+  );
+  // 推薦！pointertap 相容滑鼠及觸摸事件
+  app.stage.on('pointertap', (event) => {
+    console.log('stage', event.global);
+    cat.position.set(event.global.x, event.global.y);
   });
 });
