@@ -44,35 +44,23 @@ const texturesPromise = PIXI.Assets.load(['cat', 'blob', 'door'], onProgress);
 texturesPromise.then((texture) => {
   console.log('所有圖片載入完成');
   // console.log(texture);
-  // console.log(
-  //   'texture.cat === PIXI.utils.TextureCache.cat ?',
-  //   texture.cat === PIXI.utils.TextureCache.cat
-  // );
+
+  // 重新安排畫面 左上放一隻 cat 和 blog 沒有額外設定，等一下要講 container
   const cat = new PIXI.Sprite(texture.cat);
+  cat.x = 0;
+  cat.y = 0;
 
-  // 讓我們把 Sprite 移到畫面中央並回復正常大小再繼續。
-  cat.x = app.screen.width / 2;
-  cat.y = app.screen.height / 2;
-
-  // 改變 Sprite 錨點位置 (移到圖片長和寬的一半)
-  cat.anchor.set(0.5);
-
-  // 改變 Sprite 縮放比例
-  cat.scale.set(1);
-  // 注意：若直接改變 width height 會連動 scale 也被改變！
-
-  // 改變 Sprite.rotation 的旋轉角度 (使用的是弧度不是角度)
-  cat.rotation = Math.PI; // 旋轉 180 度 (一圈是 2 pi)
-
-  // 沒那麼糟！PIXI 有提供角度轉弧度的常數 http://pixijs.download/release/docs/PIXI.html#RAD_TO_DEG
-  // cat.rotation = 180 * PIXI.DEG_TO_RAD;
+  const blob = new PIXI.Sprite(texture.blob);
+  blob.x = 100;
+  blob.y = 0;
 
   app.stage.addChild(cat);
+  app.stage.addChild(blob);
 
   // 使用 app.ticker 讓畫面動起來！
   // app.ticker.maxFPS = 60; // 不建議這麼做
   app.ticker.add((delta) => {
-    cat.rotation += 0.01 * delta; // 現在不同螢幕更新率的裝置，轉起來的速度也都一樣了！
+    // cat.rotation += 0.01 * delta; // 現在不同螢幕更新率的裝置，轉起來的速度也都一樣了！
   });
 
   // 新增 interactive 互動事件
@@ -92,18 +80,18 @@ texturesPromise.then((texture) => {
   // });
 
   // 舞台偵聽事件的方法，需設置 hitArea
-  app.stage.eventMode = 'static';
-  app.stage.hitArea = app.screen; // app.screen 就是 PIXI.Rectangle
+  // app.stage.eventMode = 'static';
+  // app.stage.hitArea = app.screen; // app.screen 就是 PIXI.Rectangle
   // 推薦！pointertap 相容滑鼠及觸摸事件
-  app.stage.on('pointertap', (event) => {
-    console.log('stage', event.global);
-    // cat.position.set(event.global.x, event.global.y);
-    // 太單調了！來使用 gsap 實現補間動畫
-    gsap.to(cat, {
-      x: event.global.x,
-      y: event.global.y,
-      duration: 0.5,
-      ease: 'power2.out',
-    });
-  });
+  // app.stage.on('pointertap', (event) => {
+  //   console.log('stage', event.global);
+  //   // cat.position.set(event.global.x, event.global.y);
+  //   // 太單調了！來使用 gsap 實現補間動畫
+  //   gsap.to(cat, {
+  //     x: event.global.x,
+  //     y: event.global.y,
+  //     duration: 0.5,
+  //     ease: 'power2.out',
+  //   });
+  // });
 });
