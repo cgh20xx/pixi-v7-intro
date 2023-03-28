@@ -97,6 +97,13 @@ texturesPromise.then((texture) => {
   // 推薦！pointertap 相容滑鼠及觸摸事件
   app.stage.on('pointertap', (event) => {
     console.log('stage', event.global);
-    cat.position.set(event.global.x, event.global.y);
+    // cat.position.set(event.global.x, event.global.y);
+    // 太單調了！來使用 gsap 實現補間動畫
+    gsap.to(cat, {
+      x: event.global.x,
+      y: event.global.y,
+      duration: 0.5,
+      ease: 'power2.out',
+    });
   });
 });
