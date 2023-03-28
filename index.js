@@ -54,8 +54,15 @@ texturesPromise.then((texture) => {
   blob.x = 100;
   blob.y = 0;
 
-  app.stage.addChild(cat);
-  app.stage.addChild(blob);
+  // 新增一個 Container 容器，故名思義就是可以裝東西用的。
+  const container = new PIXI.Container();
+  console.log('container:', container);
+
+  container.addChild(cat);
+  container.addChild(blob);
+  // 注意：預設 container 的 width height 是依照 children 所圍出來最小的空間。
+
+  app.stage.addChild(container);
 
   // 使用 app.ticker 讓畫面動起來！
   // app.ticker.maxFPS = 60; // 不建議這麼做
