@@ -58,11 +58,20 @@ texturesPromise.then((texture) => {
   const container = new PIXI.Container();
   console.log('container:', container);
 
+  // 移動 container 所有 children 會一起移動
+  container.x = 100;
+  container.y = 100;
+  console.log('cat:', cat);
+  // 注意：children 的 x, y 座標是相對於 container
+
   container.addChild(cat);
   container.addChild(blob);
   // 注意：預設 container 的 width height 是依照 children 所圍出來最小的空間。
 
   app.stage.addChild(container);
+
+  // 取得 sprite 在畫布上 global 座標方式
+  console.log('cat global position:', cat.getGlobalPosition());
 
   // 使用 app.ticker 讓畫面動起來！
   // app.ticker.maxFPS = 60; // 不建議這麼做
